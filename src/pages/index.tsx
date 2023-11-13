@@ -1,3 +1,22 @@
+import { useQuery, gql } from '@apollo/client'
+
 export default function Index() {
-    return <h1>Index Page</h1>
+    const countries = gql`
+        query countries {
+            countries {
+                code
+                name
+                native
+                phone
+            }
+        }
+    `
+
+    const { loading, data } = useQuery(countries)
+
+    return (
+        <div>
+            <h1>{loading ? 'Loading' : 'Index Page'}</h1>
+        </div>
+    )
 }
